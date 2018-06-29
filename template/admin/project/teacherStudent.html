@@ -1,0 +1,68 @@
+<%- include ../public/header.html%>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <%- include  ../public/aslideleft.html%>
+        </div>
+
+        <div class="col-sm-10">
+            <ol class="breadcrumb">
+                <li class="active">项目管理
+                </li>
+                <li class="active">该项目下的导师和学生信息
+                </li>
+            </ol>
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    该项目下已有的导师和学生信息
+                    <input id="Button1" type="button" value="导出EXCEL"
+                           onclick="javascript:method1('ta')" />
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="ta">
+                        <thead>
+                        <tr>
+                            <th>导师姓名</th>
+                            <th>所属事业群</th>
+                            <th>所属公司/部门</th>
+                            <th>联系方式</th>
+                            <th>电子邮箱</th>
+
+                            <th>学生</th>
+                            <th>手机号</th>
+                            <th>邮箱</th>
+                            <th>所属公司/部门</th>
+                            <th>所属事业群</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <% for(var i=0;i < list.length; i++){%>
+                        <tr>
+                            <td><%=list[i].teacher_name%></td>
+                            <td><%=list[i].teacher_department%></td>
+                            <td><%=list[i].teacher_company%></td>
+                            <td><%=list[i].teacher_phone%></td>
+                            <td><%=list[i].teacher_email%></td>
+
+                            <td><%=list[i].stu_name%></td>
+                            <td><%=list[i].stu_phone%></td>
+                            <td><%=list[i].stu_email%></td>
+                            <td><%=list[i].stu_company%></td>
+                            <td><%=list[i].stu_department%></td>
+                        </tr>
+                        <%}%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

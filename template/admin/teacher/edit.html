@@ -1,0 +1,122 @@
+<%- include ../public/header.html%>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <%- include  ../public/aslideleft.html%>
+        </div>
+
+        <div class="col-sm-10">
+
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    编辑信息
+                </div>
+                <div class="panel-body">
+                    <form action="/teachers/edit" enctype="multipart/form-data" method="post" onsubmit="return validate()"  class="form-horizontal">
+                        <input type="hidden" name="uid" value="<%=list.id%>"/>
+                        <input type="hidden" name="info" value="<%=list.info%>"/>
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">
+                                <span class="red">*</span>导师姓名：
+                            </label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="name" name="name" value="<%=list.name%>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="group" class="col-sm-3 control-label">
+                                所属事业群：
+                            </label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="group" name="department" value="<%=list.department%>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="department" class="col-sm-3 control-label">
+                                所属公司/部门：
+                            </label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="department" name="company" value="<%=list.company%>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tel" class="col-sm-3 control-label">
+                                联系方式：
+                            </label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="tel" name="phone" value="<%=list.phone%>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="col-sm-3 control-label">
+                                电子邮箱：
+                            </label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="email" name="email" value="<%=list.email%>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                原头像：
+                            </label>
+                            <div class="col-sm-9">
+                                <img width="50" src="/<%=(list.info || 'images/head-default.png')%>" alt="" class="img-circle"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="icon" class="col-sm-3 control-label">
+                                更换头像：
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="file" name="icon" id="icon" style="width: 168px;" onchange="dealIcon()">
+                                <span>(图片格式为JEPG|JPG|PNG，图片大小在100k以内，宽度400px*400px)</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description" class="col-sm-3 control-label">
+                                <span class="red">*</span>导师简介：
+                            </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" rows="3" id="description" name="introduction"><%=list.introduction%></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-5">
+                                <button type="submit" class="btn btn-default">提交</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function validate() {
+        var name = $("#name").val();
+        var description = $("#description").val();
+        if(name == '') {
+            alert("姓名不能为空～～");
+            return false
+        }
+        if(description == '') {
+            alert("简介不能为空～～");
+            return false
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

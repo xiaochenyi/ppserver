@@ -1,0 +1,81 @@
+<%- include ../public/header.html%>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <%- include  ../public/aslideleft.html%>
+        </div>
+
+        <div class="col-sm-10">
+            <ol class="breadcrumb">
+                <li class="active">项目管理
+                </li>
+                <li class="active">添加项目的导师
+                </li>
+            </ol>
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    关联导师
+                </div>
+
+                <% if(list.length <= 0) {%>
+                    <div style="line-height: 3.5;">没有可以关联的导师了，您可以先去添加导师，再进行关联～</div>
+                <% } else { %>
+
+                <form action="/projects/doChoose" method="post" onsubmit="return validate()">
+                    <input type="hidden" name="pid" value="<%=pid%>">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th><input type="checkbox" id="checkAll"></th>
+                                <th>导师姓名</th>
+                                <th>头像</th>
+                                <th>所属事业群</th>
+                                <th>所属公司/部门</th>
+                                <th>联系方式</th>
+                                <th>电子邮箱</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <% for(var i=0;i < list.length; i++){%>
+                            <tr>
+                                <td><input type="checkbox" class="checkItem" value="<%=list[i].id%>" name="checkId"></td>
+                                <td><%=list[i].name%></td>
+                                <td><img width="50" src="/<%=(list[i].icon || 'images/head-default.png')%>" alt=""/></td>
+                                <td><%=list[i].department%></td>
+                                <td><%=list[i].company%></td>
+                                <td><%=list[i].phone%></td>
+                                <td><%=list[i].email%></td>
+                            </tr>
+                            <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="submit" class="btn btn-default">提交</button>
+                </form>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#checkAll").on("change", function () {
+        $(".checkItem").prop("checked",$("#checkAll").is(':checked'));
+    })
+    
+    function validate() {
+        if($("input:checked").length <= 0) {
+            alert("您还没有选择导师啊～～");
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
+
+</body>
+</html>

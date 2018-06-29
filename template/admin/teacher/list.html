@@ -1,0 +1,81 @@
+<%- include ../public/header.html%>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <%- include  ../public/aslideleft.html%>
+        </div>
+
+        <div class="col-sm-10">
+            <ol class="breadcrumb">
+                <li class="active">列表管理
+                </li>
+                <li class="active">老师列表
+                </li>
+            </ol>
+
+
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>图标</th>
+                        <th>名称</th>
+                        <th style="width: 25%">简介</th>
+                        <th>手机号</th>
+                        <th>邮箱</th>
+                        <th>事业群</th>
+                        <th>公司</th>
+
+                        <th class="text-center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <% for(var i=0;i < list.length; i++){%>
+                    <tr>
+                        <td><%=list[i].id%></td>
+                        <td><img width="50" src="/<%=(list[i].info || 'images/head-default.png')%>" alt="" class="img-circle"/></td>
+                        <td><%=list[i].name%></td>
+                        <td><%=list[i].introduction%></td>
+                        <td><%=list[i].phone%></td>
+                        <td><%=list[i].email%></td>
+                        <td><%=list[i].department%></td>
+                        <td><%=list[i].company%></td>
+
+                        <td class="text-center">
+
+                            <a href="/teachers/edit?id=<%=list[i].id%>" class="btn btn-success">修改</a>
+                            <a href="/teachers/remove?uid=<%=list[i].id%>" onclick="return del()" class="btn btn-danger">删除</a>
+
+                        </td>
+                    </tr>
+                    <%}%>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <p>每页可显示<%=size%>条，总共<%=totalCount%>条数据，共<%=Math.ceil(totalCount/size)%>页</p>
+            <!--<div class="page">-->
+                <!--<a href="/teachers/listPage/?currentPage=1">首页</a>-->
+                <!--<% for(var i = 0; i < (totalCount/size); i++){%>-->
+                    <!--<a href="/teachers/listPage/?currentPage=<%=i+1%>"><%=i+1%></a>-->
+                <!--<%}%>-->
+                <!--<a href="/teachers/listPage/?currentPage=<%=Math.ceil(totalCount/size)%>">末页</a>-->
+            <!--</div>-->
+
+            <ul class="pagination">
+                <li><a href="/teachers/listPage/?currentPage=1">首页</a></li>
+                <% for(var i = 0; i < (totalCount/size); i++){%>
+                <li><a href="/teachers/listPage/?currentPage=<%=i+1%>"><%=i+1%></a></li>
+                <%}%>
+                <li><a href="/teachers/listPage/?currentPage=<%=Math.ceil(totalCount/size)%>">末页</a></li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
